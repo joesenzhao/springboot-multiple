@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 配置文件，放在resource目录下即可 -->
+    <!--数据库驱动个人配置-->
+    <!--  <classPathEntry-->
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--序列化-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!--生成ToString方法-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!--生成EqualsHash方法-->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <plugin type="com.destiny.mybatis.helper.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
+
+        <!-- optional，旨在创建class时，对注释进行控制 -->
+        <commentGenerator type="com.destiny.mybatis.helper.MybatisCommentGenerator">
+        <!-- 是否去除自动生成日期的注释 true：是 ： false:否 -->
+            <property name="suppressDate" value="false"/>
+            <!-- 是否去除所有自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <!-- 是否添加数据表中字段的注释 true：是 ： false:否 -->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接配置-->
+        <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/training?characterEncoding=utf8"
+                        driverClass="com.mysql.cj.jdbc.Driver"
+                        userId="root"
+                        password="1qaz2wsx">
+<!--            <property name="useInformationSchema" value="true"/>-->
+            <!-- xml重复代码-->
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <!--数据库BigDecimals字段在java中定义-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="com.destiny.project.a.dao.model"
+                            targetProject="src/main/java">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!--生成Mapper.xml文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--生成mapper.java接口文件存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.destiny.project.a.dao.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--生成对应表及类名-->
+        <table schema="root" tableName="TB_USER" domainObjectName="User"
+               enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
+
+
+    </context>
+</generatorConfiguration>
