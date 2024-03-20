@@ -11,6 +11,22 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <!--  maven仓库配置 deploy时可推送到对应的配置仓库中	-->
+    <!--  正式版推送到这	-->
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <name>Nexus Releases Repository Pro</name>
+            <url>http://localhost:9001/repository/maven-releases/</url>
+        </repository>
+        <!--  测试版推送到这	-->
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <name>Nexus Snapshots Repository Pro</name>
+            <url>http://localhost:9001/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
