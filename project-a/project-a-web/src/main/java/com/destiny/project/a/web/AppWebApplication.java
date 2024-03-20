@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(scanBasePackages = {"com.destiny"})
 //扫描Mapper接口文件
 @MapperScan(basePackages = "com.destiny.**.mapper")
+//注册nacos微服务
 @EnableDiscoveryClient
 @EnableFeignClients
 public class AppWebApplication {
